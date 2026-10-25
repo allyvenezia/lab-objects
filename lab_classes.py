@@ -14,6 +14,9 @@ class User:
         0
         '''
         # TODO: store username on self, and start followers at 0
+        self.username = username
+        self.followers = 0
+        
 
     def follow(self):
         '''
@@ -26,6 +29,7 @@ class User:
         2
         '''
         # TODO: add one to self.followers
+        self.followers += 1
 
     def unfollow(self):
         '''
@@ -43,6 +47,8 @@ class User:
         0
         '''
         # TODO: subtract one from self.followers, but not below 0
+        if self.followers > 0:
+            self.followers -= 1
 
     def __str__(self):
         '''
@@ -54,6 +60,7 @@ class User:
         '@bob'
         '''
         # TODO: return the username with an '@' in front
+        return "@" + self.username
 
     def __eq__(self, other):
         '''
@@ -67,6 +74,9 @@ class User:
         False
         '''
         # TODO: return True when other is a User with the same username
+        if not isinstance(other, User):
+            return False
+        return self.username == other.username
 
 
 class Tweet:
@@ -83,6 +93,9 @@ class Tweet:
         0
         '''
         # TODO: store author and text on self, and start likes at 0
+        self.author = author
+        self.text = text
+        self.likes = 0
 
     def like(self):
         '''
@@ -95,6 +108,7 @@ class Tweet:
         2
         '''
         # TODO: add one to self.likes
+        self.likes += 1
 
     def unlike(self):
         '''
@@ -108,6 +122,8 @@ class Tweet:
         0
         '''
         # TODO: subtract one from self.likes, but not below 0
+        if self.likes > 0:
+            self.likes -= 1
 
     def hashtags(self):
         '''
@@ -122,6 +138,12 @@ class Tweet:
         '''
         # TODO: split the text into words; keep the ones starting with '#',
         # returning each one without its leading '#'
+        hashtags = []
+        for word in self.text.split():
+            if word.startswith("#"):
+                hashtags.append(word[1:])
+        return hashtags
+        
 
     def __str__(self):
         '''
@@ -131,6 +153,7 @@ class Tweet:
         @alice: hello world
         '''
         # TODO: return the author and text formatted as '@author: text'
+        return "@" + self.author + ": " + self.text
 
 
 if __name__ == '__main__':
